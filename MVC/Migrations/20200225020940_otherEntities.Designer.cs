@@ -3,14 +3,16 @@ using System;
 using MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVC.Migrations
 {
     [DbContext(typeof(MVCContext))]
-    partial class MVCContextModelSnapshot : ModelSnapshot
+    [Migration("20200225020940_otherEntities")]
+    partial class otherEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +60,7 @@ namespace MVC.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
-                    b.Property<int>("DepartmentId");
+                    b.Property<int?>("DepartmentID");
 
                     b.Property<string>("Email");
 
@@ -66,7 +68,7 @@ namespace MVC.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("DepartmentID");
 
                     b.ToTable("Seller");
                 });
@@ -82,8 +84,7 @@ namespace MVC.Migrations
                 {
                     b.HasOne("MVC.Models.Department", "Department")
                         .WithMany("Sellers")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DepartmentID");
                 });
 #pragma warning restore 612, 618
         }
